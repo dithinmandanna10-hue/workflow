@@ -1,0 +1,40 @@
+; ScalpMicro_10USD - Optimized for $10 accounts
+; Load via MT5 Strategy Tester: Inputs -> Load
+; Symbol: EURUSD, GBPUSD, XAUUSD | TF: M5
+
+InpRiskPercent=1.5
+InpFixedLot=0.01
+InpMaxLot=0.05
+InpMaxDailyLossPct=5.0
+InpDailyTargetPct=4.0
+InpMaxTradesPerDay=12
+InpMaxConsecutiveLoss=3
+InpCoolDownMinutes=45
+InpTimeframe=5
+InpEMAFast=9
+InpEMASlow=21
+InpRSIPeriod=14
+InpRSI_BuyMin=50.0
+InpRSI_BuyMax=68.0
+InpRSI_SellMin=32.0
+InpRSI_SellMax=50.0
+InpATRPeriod=14
+InpATR_SL_Mult=1.8
+InpATR_TP_Mult=1.2
+InpMinATRPoints=50
+InpMaxATRPoints=800
+InpMaxSpreadPoints=250
+InpUseSpreadFilter=1
+InpTradeMonday=1
+InpTradeFriday=1
+InpStartHour=0
+InpEndHour=23
+InpUseBreakeven=1
+InpBreakevenPlusPoints=50
+InpBreakevenTriggerPoints=100
+InpUseTrailing=1
+InpTrailingStartPoints=120
+InpTrailingStepPoints=60
+InpMaxHoldMinutes=90
+InpMagic=101010
+InpComment=Micro10$
