@@ -113,4 +113,29 @@ PRESETS = {
         risk=RiskConfig(risk_percent=1.5, max_lot=0.02, max_daily_loss_pct=5.0, daily_target_pct=6.0, max_trades_per_day=20),
         exit=ExitConfig(breakeven_trigger_points=100, breakeven_plus_points=50, trailing_start_points=120, trailing_step_points=60, max_hold_minutes=60)
     ),
+    # === SPAM ULTRA QUICK (80-150 trades/day, 30sec-3min holds, tick spam) ===
+    "SPAM_EURUSD_M1": BotConfig(
+        execution=ExecutionConfig(symbol="EURUSD", max_spread_points=18, start_hour=7, end_hour=22, min_bars_between_trades=0),
+        strategy=StrategyConfig(timeframe="M1", ema_fast=5, ema_slow=13, rsi_period=7, rsi_buy_min=55, rsi_buy_max=78, rsi_sell_min=22, rsi_sell_max=45, atr_period=10, atr_sl_mult=1.0, atr_tp_mult=0.7, min_atr_points=30, max_atr_points=400),
+        risk=RiskConfig(risk_percent=1.8, max_lot=0.03, max_daily_loss_pct=7.0, daily_target_pct=8.0, max_trades_per_day=150, max_consecutive_losses=5, cooldown_minutes=10),
+        exit=ExitConfig(breakeven_trigger_points=35, breakeven_plus_points=20, trailing_start_points=40, trailing_step_points=15, max_hold_minutes=3)
+    ),
+    "SPAM_XAUUSD_M1": BotConfig(
+        execution=ExecutionConfig(symbol="XAUUSD", max_spread_points=300, start_hour=7, end_hour=22, min_bars_between_trades=0),
+        strategy=StrategyConfig(timeframe="M1", ema_fast=5, ema_slow=13, rsi_period=7, rsi_buy_min=55, rsi_buy_max=78, rsi_sell_min=22, rsi_sell_max=45, atr_period=10, atr_sl_mult=1.2, atr_tp_mult=0.8, min_atr_points=40, max_atr_points=600),
+        risk=RiskConfig(risk_percent=1.5, max_lot=0.02, max_daily_loss_pct=7.0, daily_target_pct=8.0, max_trades_per_day=120),
+        exit=ExitConfig(breakeven_trigger_points=40, breakeven_plus_points=20, trailing_start_points=45, trailing_step_points=15, max_hold_minutes=4)
+    ),
+    "SPAM_GBPUSD_M1": BotConfig(
+        execution=ExecutionConfig(symbol="GBPUSD", max_spread_points=18, start_hour=7, end_hour=22, min_bars_between_trades=0),
+        strategy=StrategyConfig(timeframe="M1", ema_fast=5, ema_slow=13, rsi_period=7, rsi_buy_min=55, rsi_buy_max=78, rsi_sell_min=22, rsi_sell_max=45, atr_period=10, atr_sl_mult=1.0, atr_tp_mult=0.7, min_atr_points=30, max_atr_points=400),
+        risk=RiskConfig(risk_percent=1.8, max_lot=0.03, max_daily_loss_pct=7.0, daily_target_pct=8.0, max_trades_per_day=150),
+        exit=ExitConfig(breakeven_trigger_points=35, breakeven_plus_points=20, trailing_start_points=40, trailing_step_points=15, max_hold_minutes=3)
+    ),
+    "SPAM_V75_M1": BotConfig(
+        execution=ExecutionConfig(symbol="Volatility 75 Index", max_spread_points=600, start_hour=0, end_hour=23, min_bars_between_trades=0),
+        strategy=StrategyConfig(timeframe="M1", ema_fast=5, ema_slow=13, rsi_period=7, rsi_buy_min=50, rsi_buy_max=75, rsi_sell_min=25, rsi_sell_max=50, atr_period=10, atr_sl_mult=1.0, atr_tp_mult=0.8, min_atr_points=80, max_atr_points=40000),
+        risk=RiskConfig(risk_percent=1.5, max_lot=0.02, max_daily_loss_pct=8.0, daily_target_pct=10.0, max_trades_per_day=200),
+        exit=ExitConfig(breakeven_trigger_points=30, breakeven_plus_points=15, trailing_start_points=35, trailing_step_points=10, max_hold_minutes=2)
+    ),
 }
