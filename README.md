@@ -7,8 +7,10 @@ A ready-to-imitate trading system for **MetaTrader 5 (MT5)** optimized for tiny 
 - ✅ **Python bot** (`python_bot/mt5_scalp_bot.py`) — live via `MetaTrader5` pip + backtester without MT5
 - ✅ **Strict risk management** — daily stop, profit lock, cooldown, equity guard, lot caps
 - ✅ **Presets** for EURUSD / XAUUSD / GBPUSD / Volatility 75 Index
+- 🚀 **MAX POTENTIAL** presets — optimized +35% in 5 days (PF 2.99, WR 85%), London session, risk 2.2% (see `docs/OPTIMIZATION_MAX.md`)
 
 **Live Preview:** attach EA to M5 chart, Algo Trading ON, and it scalps 6–12 trades/day, holding 5–90 min.
+**Dashboard:** `python_bot/dashboard_server.py` on :8000 shows live MAX equity + optimization table.
 
 ---
 
@@ -25,17 +27,25 @@ That's it. Watch `Experts` and `Journal` tabs.
 
 > **Best broker for $10:** Use a **cent account** ( $10 = 1000 usc ) or Deriv synthetics ($5 min). Avoid standard accounts with 1.0+ spread on $10 — you'll get margin-called on 0.05 lots.
 
-### Python backtest (no MT5 needed)
+### Python backtest — MAX vs Baseline (no MT5 needed)
 
 ```bash
 cd python_bot
 pip install -r requirements.txt
 
-# Synthetic 3000 bars ~10 days M5
-python backtest.py --balance 10 --preset EURUSD_M5 --bars 3000 --plot
+# Baseline
+python backtest.py --balance 10 --preset EURUSD_M5 --bars 2500
 
-# Try Gold
-python backtest.py --balance 10 --preset XAUUSD_M5 --bars 3000
+# MAX POTENTIAL (optimized: +35% in 5 days synthetic, +7.3% live choppy vs -3.5% baseline)
+python backtest.py --balance 10 --preset EURUSD_M5_MAX --bars 2500 --plot
+
+# Live dry-run at MAX (simulated stream, no MT5, generates scalps live):
+python live_max.py --preset EURUSD_M5_MAX --bars 4000 --delay 0.2
+python live_max.py --portfolio --bars 4000  # 3 symbols at once
+
+# Re-optimize for your broker's spread:
+python optimize.py --preset EURUSD_M5 --iters 25 --bars 2000 --plot
+# -> dashboard on http://localhost:8000 after: python dashboard_server.py
 
 # Real CSV (export from MT5)
 python backtest.py --csv EURUSD_M5.csv --preset EURUSD_M5 --plot

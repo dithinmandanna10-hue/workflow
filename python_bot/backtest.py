@@ -328,7 +328,7 @@ def main():
     parser.add_argument("--balance", type=float, default=10.0)
     parser.add_argument("--bars", type=int, default=2000)
     parser.add_argument("--csv", type=str, default=None)
-    parser.add_argument("--preset", type=str, default="EURUSD_M5", choices=["EURUSD_M5","XAUUSD_M5","GBPUSD_M1","VOLATILITY75_M1"])
+    parser.add_argument("--preset", type=str, default="EURUSD_M5", choices=list(PRESETS.keys()))
     parser.add_argument("--plot", action="store_true", help="save equity.png")
     args = parser.parse_args()
 
@@ -339,11 +339,12 @@ def main():
         df = load_csv(args.csv)
         print(f"[DATA] Loaded {len(df)} bars from {args.csv}  {df['time'].iloc[0]} -> {df['time'].iloc[-1]}")
     else:
-        # choose vol & start price per preset (realistic)
+        # choose vol & start price per preset (realistic) - MAX variants use same underlying volatility
+        base_preset = args.preset.replace("_MAX","")
         preset_vol = {"EURUSD_M5":0.0008, "GBPUSD_M1":0.0012, "XAUUSD_M5":0.002, "VOLATILITY75_M1":0.003}
         preset_price = {"EURUSD_M5":1.085, "GBPUSD_M1":1.275, "XAUUSD_M5":2680, "VOLATILITY75_M1":135000}
-        vol = preset_vol.get(args.preset, 0.0008)
-        start_price = preset_price.get(args.preset, 1.085)
+        vol = preset_vol.get(base_preset, 0.0008)
+        start_price = preset_price.get(base_preset, 1.085)
         df = generate_synthetic_ohlc(n=args.bars, start_price=start_price, volatility=vol)
         print(f"[DATA] Synthetic {len(df)} bars vol {vol} start {start_price} ({args.preset})")
 
